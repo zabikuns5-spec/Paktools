@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PakTools — free, fast and mobile-friendly online tools and calculators.">
+<meta name="theme-color" content="#0b1220">
+<title>PakTools — Free Online Tools</title>
+<style>
+:root{
+  --bg:#f6f8fc;--surface:#fff;--surface2:#eef2f8;--text:#101828;--muted:#667085;
+  --primary:#2563eb;--primary2:#1d4ed8;--border:#e4e7ec;--shadow:0 12px 35px rgba(16,24,40,.08);
+  --nav:#0b1220;--success:#16a34a;--danger:#dc2626
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.topbar{background:var(--nav);color:#dbe4f0;padding:8px 18px;text-align:center;font-size:13px}
+header{background:linear-gradient(135deg,#0b1220 0%,#14213d 55%,#1d4ed8 140%);color:#fff}
+.nav{max-width:1120px;margin:auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.4px}
+.logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#60a5fa,#2563eb);box-shadow:0 8px 22px rgba(37,99,235,.35);font-size:19px}
+.navlinks{display:flex;gap:18px;font-size:14px}
+.navlinks a{color:#dbe4f0;text-decoration:none}
+.navlinks a:hover{color:#fff}
+.theme{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;border-radius:10px;padding:8px 10px}
+.hero{max-width:1120px;margin:auto;padding:54px 20px 64px;text-align:center}
+.badge{display:inline-flex;gap:7px;align-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);padding:7px 12px;border-radius:999px;font-size:13px;color:#dbeafe}
+.hero h1{font-size:clamp(38px,7vw,66px);line-height:1.02;margin:18px 0 14px;letter-spacing:-2.5px}
+.hero h1 span{color:#60a5fa}
+.hero p{max-width:650px;margin:0 auto;color:#cbd5e1;font-size:17px;line-height:1.65}
+.hero-actions{display:flex;justify-content:center;gap:12px;margin-top:26px;flex-wrap:wrap}
+.primary,.secondary{border:0;border-radius:12px;padding:13px 18px;font-weight:750}
+.primary{background:#fff;color:#0b1220}
+.secondary{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff}
+.container{max-width:1120px;margin:auto;padding:0 20px}
+.tools-head{display:flex;align-items:end;justify-content:space-between;gap:20px;padding:38px 0 18px}
+.tools-head h2{margin:0;font-size:28px;letter-spacing:-.7px}
+.tools-head p{margin:6px 0 0;color:var(--muted)}
+.search{width:min(360px,100%);padding:13px 15px;border:1px solid var(--border);border-radius:12px;background:var(--surface);outline:none}
+.search:focus,input:focus,textarea:focus,select:focus{border-color:#93b4ff;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow);transition:.2s transform,.2s box-shadow}
+.card:hover{transform:translateY(-3px);box-shadow:0 18px 42px rgba(16,24,40,.12)}
+.icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:#eff6ff;color:#2563eb;font-size:22px;margin-bottom:17px}
+.card h3{margin:0 0 8px;font-size:19px}
+.card p{color:var(--muted);line-height:1.55;min-height:48px;margin:0 0 18px;font-size:14px}
+.open{width:100%;padding:11px 14px;border:0;border-radius:11px;background:#0b1220;color:#fff;font-weight:700}
+.open:hover{background:#1d4ed8}
+.hidden{display:none!important}
+.panel{display:none;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;margin:26px 0;box-shadow:var(--shadow)}
+.panel.active{display:block;animation:up .25s ease}
+@keyframes up{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}
+.panel h2{margin:0;font-size:24px}
+.close{border:1px solid var(--border);background:var(--surface2);border-radius:10px;padding:8px 11px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+label{display:block;font-size:13px;font-weight:700;margin:0 0 7px;color:var(--muted)}
+input,textarea,select{width:100%;padding:12px 13px;border:1px solid var(--border);border-radius:11px;background:var(--surface);color:var(--text);outline:none}
+textarea{resize:vertical}
+.calc{margin-top:15px;border:0;border-radius:11px;padding:12px 16px;background:var(--primary);color:#fff;font-weight:750}
+.result{margin-top:15px;padding:15px;border-radius:12px;background:var(--surface2);font-weight:750;line-height:1.55}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 40px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:18px;text-align:center}
+.stat strong{display:block;font-size:24px}.stat span{color:var(--muted);font-size:13px}
+footer{margin-top:42px;background:#0b1220;color:#aeb9c9;padding:34px 20px;text-align:center}
+footer strong{color:#fff}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}.tools-head{align-items:stretch;flex-direction:column}.search{width:100%}}
+@media(max-width:560px){.grid,.form-grid,.stats{grid-template-columns:1fr}.hero{padding:42px 20px 50px}.hero h1{letter-spacing:-1.5px}.card{padding:19px}.panel{padding:19px}}
+body.dark{--bg:#070b14;--surface:#0f1726;--surface2:#182234;--text:#f1f5f9;--muted:#9aa8ba;--border:#253247;--shadow:0 12px 35px rgba(0,0,0,.25)}
+body.dark .icon{background:#172554}
+body.dark .open{background:#2563eb}
+</style>
+</head>
+<body>
+<div class="topbar">⚡ Fast • Free • Mobile-friendly • No sign-up</div>
+<header>
+  <nav class="nav">
+    <div class="brand"><div class="logo">⚙</div>PakTools</div>
+    <div class="navlinks"><a href="#tools">Tools</a><a href="#about">About</a></div>
+    <button class="theme" onclick="toggleTheme()" aria-label="Toggle theme">☾</button>
+  </nav>
+  <section class="hero">
+    <div class="badge">✦ Simple tools for everyday work</div>
+    <h1>Useful tools.<br><span>Made simple.</span></h1>
+    <p>Calculate, convert and write faster with clean, free tools that work smoothly on your phone, tablet and computer.</p>
+    <div class="hero-actions">
+      <button class="primary" onclick="document.getElementById('tools').scrollIntoView()">Explore Tools ↓</button>
+      <button class="secondary" onclick="openTool('percentage')">Try Calculator</button>
+    </div>
+  </section>
+</header>
+
+<main class="container" id="tools">
+  <div class="tools-head">
+    <div><h2>Popular tools</h2><p>Everything runs directly in your browser.</p></div>
+    <input class="search" id="search" placeholder="🔎 Search tools..." oninput="filterTools()">
+  </div>
+
+  <div class="grid" id="cards">
+    <article class="card" data-name="percentage calculator percentage">
+      <div class="icon">％</div><h3>Percentage Calculator</h3><p>Find a percentage of any number instantly.</p>
+      <button class="open" onclick="openTool('percentage')">Open Tool →</button>
+    </article>
+    <article class="card" data-name="age calculator age">
+      <div class="icon">🎂</div><h3>Age Calculator</h3><p>Calculate your exact age from your date of birth.</p>
+      <button class="open" onclick="openTool('age')">Open Tool →</button>
+    </article>
+    <article class="card" data-name="word counter words characters">
+      <div class="icon">✍️</div><h3>Word Counter</h3><p>Count words, characters and lines while you type.</p>
+      <button class="open" onclick="openTool('words')">Open Tool →</button>
+    </article>
+    <article class="card" data-name="bmi calculator health">
+      <div class="icon">⚖️</div><h3>BMI Calculator</h3><p>Calculate BMI using your height and weight.</p>
+      <button class="open" onclick="openTool('bmi')">Open Tool →</button>
+    </article>
+    <article class="card" data-name="unit converter conversion">
+      <div class="icon">⇄</div><h3>Unit Converter</h3><p>Convert kilometres, miles, kilograms, pounds and more.</p>
+      <button class="open" onclick="openTool('units')">Open Tool →</button>
+    </article>
+    <article class="card" data-name="password generator security">
+      <div class="icon">🔐</div><h3>Password Generator</h3><p>Create a strong random password in one tap.</p>
+      <button class="open" onclick="openTool('password')">Open Tool →</button>
+    </article>
+  </div>
+
+  <section class="panel" id="percentage">
+    <div class="panel-head"><h2>Percentage Calculator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form-grid">
+      <div><label>Number</label><input id="num" type="number" placeholder="500"></div>
+      <div><label>Percentage (%)</label><input id="percent" type="number" placeholder="20"></div>
+    </div>
+    <button class="calc" onclick="calcPercent()">Calculate</button>
+    <div class="result" id="percentResult">Your result will appear here.</div>
+  </section>
+
+  <section class="panel" id="age">
+    <div class="panel-head"><h2>Age Calculator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <label>Date of birth</label><input id="dob" type="date">
+    <button class="calc" onclick="calcAge()">Calculate Age</button>
+    <div class="result" id="ageResult">Your age will appear here.</div>
+  </section>
+
+  <section class="panel" id="words">
+    <div class="panel-head"><h2>Word Counter</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <textarea id="text" rows="9" placeholder="Type or paste your text here..." oninput="countWords()"></textarea>
+    <div class="result" id="wordResult">Words: 0 • Characters: 0 • Lines: 0</div>
+  </section>
+
+  <section class="panel" id="bmi">
+    <div class="panel-head"><h2>BMI Calculator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form-grid">
+      <div><label>Weight (kg)</label><input id="weight" type="number" placeholder="70"></div>
+      <div><label>Height (cm)</label><input id="height" type="number" placeholder="170"></div>
+    </div>
+    <button class="calc" onclick="calcBMI()">Calculate BMI</button>
+    <div class="result" id="bmiResult">Enter your height and weight.</div>
+  </section>
+
+  <section class="panel" id="units">
+    <div class="panel-head"><h2>Unit Converter</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form-grid">
+      <div><label>Value</label><input id="unitValue" type="number" placeholder="10"></div>
+      <div><label>Conversion</label>
+        <select id="unitType">
+          <option value="kmmi">Kilometres → Miles</option>
+          <option value="mikl">Miles → Kilometres</option>
+          <option value="kg">Kilograms → Pounds</option>
+          <option value="lb">Pounds → Kilograms</option>
+          <option value="cmft">Centimetres → Feet</option>
+          <option value="ftcm">Feet → Centimetres</option>
+        </select>
+      </div>
+    </div>
+    <button class="calc" onclick="convertUnit()">Convert</button>
+    <div class="result" id="unitResult">Your conversion will appear here.</div>
+  </section>
+
+  <section class="panel" id="password">
+    <div class="panel-head"><h2>Password Generator</h2><button class="close" onclick="closeTools()">✕</button></div>
+    <div class="form-grid">
+      <div><label>Password length</label><input id="passLen" type="number" min="6" max="64" value="16"></div>
+      <div><label>Options</label><select id="passMode"><option value="all">Letters + numbers + symbols</option><option value="letters">Letters + numbers</option></select></div>
+    </div>
+    <button class="calc" onclick="generatePassword()">Generate Password</button>
+    <div class="result" id="passResult">Tap Generate to create a password.</div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><strong>6+</strong><span>Useful tools</span></div>
+    <div class="stat"><strong>100%</strong><span>Browser-based</span></div>
+    <div class="stat"><strong>0</strong><span>Sign-up required</span></div>
+  </div>
+</main>
+
+<footer id="about"><strong>PakTools</strong><br><br>Free online utilities designed for everyday use.<br><br>© 2026 PakTools</footer>
+
+<script>
+function openTool(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  const panel=document.getElementById(id);
+  if(panel){panel.classList.add('active');setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'start'}),20)}
+}
+function closeTools(){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'))}
+function filterTools(){
+  const q=document.getElementById('search').value.toLowerCase().trim();
+  document.querySelectorAll('.card').forEach(c=>c.classList.toggle('hidden',!c.dataset.name.includes(q)));
+}
+function calcPercent(){
+  const n=parseFloat(document.getElementById('num').value),p=parseFloat(document.getElementById('percent').value);
+  document.getElementById('percentResult').textContent=isNaN(n)||isNaN(p)?'Please enter both numbers.':`${p}% of ${n} = ${(n*p/100).toLocaleString()}`;
+}
+function calcAge(){
+  const v=document.getElementById('dob').value,r=document.getElementById('ageResult');
+  if(!v){r.textContent='Please select your date of birth.';return}
+  const dob=new Date(v+'T00:00:00'),today=new Date();
+  if(dob>today){r.textContent='Date of birth cannot be in the future.';return}
+  let y=today.getFullYear()-dob.getFullYear(),m=today.getMonth()-dob.getMonth(),d=today.getDate()-dob.getDate();
+  if(d<0){m--;d+=new Date(today.getFullYear(),today.getMonth(),0).getDate()}
+  if(m<0){y--;m+=12}
+  r.textContent=`You are ${y} years, ${m} months and ${d} days old.`;
+}
+function countWords(){
+  const t=document.getElementById('text').value;
+  const words=t.trim()?t.trim().split(/\s+/).length:0,lines=t? t.split(/\n/).length:0;
+  document.getElementById('wordResult').textContent=`Words: ${words} • Characters: ${t.length} • Lines: ${lines}`;
+}
+function calcBMI(){
+  const w=parseFloat(document.getElementById('weight').value),h=parseFloat(document.getElementById('height').value)/100,r=document.getElementById('bmiResult');
+  if(!w||!h||w<=0||h<=0){r.textContent='Please enter valid height and weight.';return}
+  const bmi=w/(h*h),cat=bmi<18.5?'Underweight':bmi<25?'Healthy range':bmi<30?'Overweight':'Obesity';
+  r.textContent=`BMI: ${bmi.toFixed(1)} • Category: ${cat}`;
+}
+function convertUnit(){
+  const v=parseFloat(document.getElementById('unitValue').value),t=document.getElementById('unitType').value,r=document.getElementById('unitResult');
+  if(isNaN(v)){r.textContent='Please enter a value.';return}
+  const map={kmmi:[.621371,'miles'],mikl:[1.609344,'km'],kg:[2.20462,'lb'],lb:[.45359237,'kg'],cmft:[.0328084,'ft'],ftcm:[30.48,'cm']};
+  r.textContent=`${(v*map[t][0]).toLocaleString(undefined,{maximumFractionDigits:4})} ${map[t][1]}`;
+}
+function generatePassword(){
+  let len=Math.min(64,Math.max(6,parseInt(document.getElementById('passLen').value)||16));
+  let chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  if(document.getElementById('passMode').value==='all')chars+='!@#$%^&*()-_=+[]{}?';
+  let out='';const a=new Uint32Array(len);crypto.getRandomValues(a);
+  for(let i=0;i<len;i++)out+=chars[a[i]%chars.length];
+  document.getElementById('passResult').textContent=out;
+}
+function toggleTheme(){document.body.classList.toggle('dark');localStorage.setItem('paktools-theme',document.body.classList.contains('dark')?'dark':'light')}
+if(localStorage.getItem('paktools-theme')==='dark')document.body.classList.add('dark');
+</script>
+</body>
+</html>
